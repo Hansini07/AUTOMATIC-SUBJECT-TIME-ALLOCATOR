@@ -1,82 +1,54 @@
-import java.util.*;
+AUTOMATIC-SUBJECT-TIME-ALLOCATOR
 
-class TimetableScheduler {
+A simple Java console-based Timetable Scheduler that automatically generates a weekly timetable based on the subjects provided by the user. The program distributes subjects evenly across periods and days, making it useful for students or schools who need a quick timetable layout.
 
-    private List<String> subjects = new ArrayList<>();
-    private Map<String, List<String>> timetable = new LinkedHashMap<>();
-    private int periodsPerDay;
+Features
 
-    // Add subjects
-    public void addSubject(String subject) {
-        subjects.add(subject);
-    }
+1. Add multiple subjects through user input
+2. Set the number of periods per day
+3. Automatically generate a weekly timetable (Monday–Saturday)
+4. Subjects are assigned cyclically to avoid imbalance
+5. Neatly displays the timetable in a table format
+6. Fully console-based and easy to use
 
-    // Set number of periods per day
-    public void setPeriodsPerDay(int periods) {
-        this.periodsPerDay = periods;
-    }
+Tech Stack
 
-    // Generate automatic timetable
-    public void generateTimetable() {
-        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+1. Language: Java
+2. Type: Comand prompt Application
+3. Storage: In-memory (no file saving in this version)
 
-        for (String day : days) {
-            timetable.put(day, new ArrayList<>());
-        }
+Project Structure
 
-        int subjectIndex = 0;
+1. Entry point (contains the main method)
+2. Handles user input through Scanner
+3. Stores the list of subjects
+4. Sets number of periods per day
+5. Automatically generates the weekly timetable (Monday–Saturday)
+6. Prints the timetable in a table format
 
-        for (String day : days) {
-            for (int p = 0; p < periodsPerDay; p++) {
-                timetable.get(day).add(subjects.get(subjectIndex));
-                subjectIndex = (subjectIndex + 1) % subjects.size();
-            }
-        }
-    }
+How to Run
 
-    // Print timetable in table format
-    public void printTimetable() {
-        System.out.println("\n================ TIMETABLE ================\n");
+1.	Make sure Java (JDK 8+) is installed.
+2.	Save the code in a file named TimetableScheduler.java.
+3.	Open a terminal in the file directory.
+4.	Compile the code:  javac TimetableScheduler.java
+5.	Run the program:   java TimetableSchedule
+   
+Program Flow
 
-        // Print header row
-        System.out.printf("%-12s", "Day");
-        for (int p = 1; p <= periodsPerDay; p++) {
-            System.out.printf("| %-15s", "Period " + p);
-        }
-        System.out.println();
-        System.out.println("---------------------------------------------------------------"
-                + "----------------------------------------");
+When you run the program, the terminal will ask: 1. Enter number of subjects
+                                                 2.	Enter each subject name
+                                                 3.	Enter number of periods per day
 
-        // Print rows for each day
-        for (String day : timetable.keySet()) {
-            System.out.printf("%-12s", day);
+Data Handling
 
-            for (String subject : timetable.get(day)) {
-                System.out.printf("| %-15s", subject);
-            }
+1. The timetable is generated and stored in memory only (no file persistence).
+2. The timetable follows a cyclic subject assignment to keep distribution balanced across days and periods.
 
-            System.out.println();
-        }
-    }
+Future Improvements
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        TimetableScheduler scheduler = new TimetableScheduler();
+1. Allow saving and loading timetable from a text file
+2. Add editing or removing subjects
+3. Add support for teacher names, room numbers, or time durations
+4. Add option to customize days (Mon–Fri or Mon–Sat)
 
-        System.out.println("Enter number of subjects:");
-        int n = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("Enter subject names:");
-        for (int i = 0; i < n; i++) {
-            scheduler.addSubject(sc.nextLine());
-        }
-
-        System.out.println("Enter number of periods per day:");
-        int periods = sc.nextInt();
-        scheduler.setPeriodsPerDay(periods);
-
-        scheduler.generateTimetable();
-        scheduler.printTimetable();
-    }
-}
