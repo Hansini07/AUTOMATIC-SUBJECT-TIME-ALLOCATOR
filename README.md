@@ -50,7 +50,4 @@ Future Improvements
 2. Add editing or removing subjects
 3.Add support for teacher names, room numbers, or time durations
 4.Add option to customize days (Mon–Fri or Mon–Sat)
-5.Validate input more strictly
-6.Prevent consecutive repeats of the same subject
-7. Convert into GUI with Swing or JavaFX
 
