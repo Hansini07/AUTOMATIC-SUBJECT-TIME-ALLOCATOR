@@ -14,7 +14,7 @@ Features
 Tech Stack
 
 1. Language: Java
-2. Type: Comand prompt Application
+2. Type: VS Editor
 3. Storage: In-memory (no file saving in this version)
 
 Project Structure
